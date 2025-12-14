@@ -38,15 +38,16 @@ def main():
     if option == "View raw data":
         st.subheader("Raw Data (first 50 rows)")
         st.dataframe(df.head(50))
-
     elif option == "Data summary":
-        st.subheader("DataFrame Info")
-        buffer = []
-        df.info(buf=buffer.append)
-        st.text("\n".join(buffer))
+    st.subheader("DataFrame Info")
 
-        st.subheader("Describe (stats)")
-        st.write(df.describe(include="all"))
+    import io
+    buffer = io.StringIO()
+    df.info(buf=buffer)
+    st.text(buffer.getvalue())
+
+    st.subheader("Describe (stats)")
+    st.write(df.describe(include="all"))
 
     elif option == "Filter rows":
         st.subheader("Filter Rows")

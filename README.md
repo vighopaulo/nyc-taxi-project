@@ -63,7 +63,8 @@ The dataset file is stored locally in the repository under the data/ directory.
 
 ⸻
 
-Technologies Used
+## Technologies Used
+
 	•	Python 3
 	•	Pandas – data manipulation and analysis
 	•	NumPy – numerical support

@@ -39,15 +39,16 @@ def main():
         st.subheader("Raw Data (first 50 rows)")
         st.dataframe(df.head(50))
     elif option == "Data summary":
-    st.subheader("DataFrame Info")
+        st.subheader("DataFrame Info")
+        
+        import io
+        buffer = io.StringIO()
+        df.info(buf=buffer)
+        st.text(buffer.getvalue())
 
-    import io
-    buffer = io.StringIO()
-    df.info(buf=buffer)
-    st.text(buffer.getvalue())
-
-    st.subheader("Describe (stats)")
-    st.write(df.describe(include="all"))
+        st.subheader("Describe (stats)")
+        st.write(df.describe(include="all"))
+        
 
     elif option == "Filter rows":
         st.subheader("Filter Rows")

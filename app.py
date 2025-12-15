@@ -29,6 +29,7 @@ def main():
         [
             "View raw data",
             "Data summary",
+            "Data quality & charts",
             "Filter rows",
             "Group & aggregate",
             "Plot numeric column",
@@ -48,6 +49,34 @@ def main():
 
         st.subheader("Describe (stats)")
         st.write(df.describe(include="all"))
+        
+    elif option == "Data quality & charts":
+    st.subheader("Missing Values (per column)")
+    missing = df.isna().sum().sort_values(ascending=False)
+    st.dataframe(missing.rename("missing_count"))
+
+    st.subheader("Missing Values (%)")
+    missing_pct = (missing / len(df) * 100).round(2)
+    st.dataframe(missing_pct.rename("missing_percent"))
+
+    st.subheader("Duplicate Rows")
+    dup_count = df.duplicated().sum()
+    st.write(f"Duplicate rows: **{dup_count}**")
+
+    st.subheader("Numeric Column Distributions")
+    numeric_cols = df.select_dtypes(include="number").columns.tolist()
+    if numeric_cols:
+        col = st.selectbox("Pick a numeric column", numeric_cols)
+        st.bar_chart(df[col].dropna().value_counts().head(30))
+    else:
+        st.warning("No numeric columns detected for distribution plots.")
+
+    st.subheader("Correlation (Numeric Columns)")
+    if len(numeric_cols) >= 2:
+        corr = df[numeric_cols].corr(numeric_only=True)
+        st.dataframe(corr)
+    else:
+        st.warning("Need at least two numeric columns for correlation.")
         
 
     elif option == "Filter rows":

@@ -10,47 +10,78 @@ This project was created as part of my Python coursework to demonstrate:
 
 ---
 
-## 🚕 Dataset  
-The project uses NYC Taxi & Limousine Commission public dataset samples.
+## 🚕 Dataset 
 
-The sample file included here is a small CSV used for demonstration.  
-You can replace this file with **any** CSV as long as you update the column names in the app if needed.
+	•	Source: New York City Taxi & Limousine Commission (TLC) public data (sampled)
+	•	Format: CSV
+	•	Size: 800+ rows, multiple categorical and numerical fields
+	•	Characteristics:
+	•	Mixed data types (categorical, numeric, time-like fields)
+	•	Realistic structure typical of production datasets
+	•	Suitable for demonstrating data cleaning and EDA workflows
+
+The dataset file is stored locally in the repository under the data/ directory.
 
 ---
 
-## 🧰 Features  
+## 🧰 Application Features  
 
-### ✔ Data Loading & Cleaning  
-- Automatic detection of numeric, datetime, and text columns  
-- Invalid values removed  
-- Trip duration and trip rate feature-engineering  
+1. Data Loading & Type Handling
+	•	Loads data using Pandas
+	•	Automatically inspects column data types
+	•	Attempts conversion of date/time-like columns
+	•	Uses caching to improve performance
 
-### ✔ Interactive Tools  
-The Streamlit sidebar allows you to perform:
+2. Raw Data Inspection
+	•	Displays the first 50 rows of the dataset
+	•	Allows users to inspect the raw structure of the data
 
-#### **1. View Raw Data**  
-Displays the first 50 rows.
+3. Data Summary & Statistics
+	•	Displays full DataFrame metadata using df.info()
+	•	Shows descriptive statistics using df.describe(include="all")
+	•	Enables inspection of:
+	•	column types
+	•	non-null counts
+	•	memory usage
+	•	summary statistics for numeric and categorical columns
 
-#### **2. Describe Data**  
-Shows Pandas `.describe()` summary statistics.
+4. Interactive Filtering
+	•	Filter rows based on:
+	•	Numeric ranges (sliders)
+	•	Date ranges (date pickers)
+	•	Categorical values (multi-select)
+	•	Displays filtered results immediately
 
-#### **3. Filter Rows**  
-Supports:
-- Numeric range filters  
-- Date/time filters  
-- Text/category filters  
+5. Grouping & Aggregation
+	•	Group data by a selected column
+	•	Compute mean values for selected numeric columns
+	•	Display aggregated tables and bar charts
 
-#### **4. Group & Aggregate**  
-Group by any column and compute mean values.
+6. Visualization
+	•	Generate line charts for numeric columns
+	•	Visualize trends and distributions directly in the app
 
-#### **5. Plot Numeric Columns**  
-Generate line charts for numeric columns.
+⸻
 
+Technologies Used
+	•	Python 3
+	•	Pandas – data manipulation and analysis
+	•	NumPy – numerical support
+	•	Streamlit – interactive web interface and deployment
+	•	GitHub – version control and project hosting
 ---
 
 ## 🖥️ Running the App Locally  
 
-### **1. Clone the repository**
-```bash
 git clone https://github.com/vighopaulo/nyc-taxi-project.git
 cd nyc-taxi-project
+pip install -r requirements.txt
+streamlit run app.py
+
+
+## (Live Deployment)
+
+The application is deployed on Streamlit Community Cloud:
+
+👉 Live App URL:
+https://vighopaulo-nyc-taxi-project-app-9tpjw4.streamlit.app

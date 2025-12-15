@@ -51,20 +51,21 @@ def main():
         st.write(df.describe(include="all"))
         
     elif option == "Data quality & charts":
-    st.subheader("Missing Values (per column)")
-    missing = df.isna().sum().sort_values(ascending=False)
-    st.dataframe(missing.rename("missing_count"))
+        st.subheader("Missing Values (per column)")
+        missing = df.isna().sum().sort_values(ascending=False)
+        st.dataframe(missing.rename("missing_count"))
 
-    st.subheader("Missing Values (%)")
-    missing_pct = (missing / len(df) * 100).round(2)
-    st.dataframe(missing_pct.rename("missing_percent"))
+        st.subheader("Missing Values (%)")
+        missing_pct = (missing / len(df) * 100).round(2)
+        st.dataframe(missing_pct.rename("missing_percent"))
 
-    st.subheader("Duplicate Rows")
-    dup_count = df.duplicated().sum()
-    st.write(f"Duplicate rows: **{dup_count}**")
+        st.subheader("Duplicate Rows")
+        dup_count = df.duplicated().sum()
+        st.write(f"Duplicate rows: **{dup_count}**")
 
-    st.subheader("Numeric Column Distributions")
-    numeric_cols = df.select_dtypes(include="number").columns.tolist()
+        st.subheader("Numeric Column Distributions")
+        numeric_cols = df.select_dtypes(include="number").columns.tolist()
+    
     if numeric_cols:
         col = st.selectbox("Pick a numeric column", numeric_cols)
         st.bar_chart(df[col].dropna().value_counts().head(30))

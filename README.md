@@ -1,27 +1,20 @@
 # NYC Taxi Data Explorer  
-A simple interactive data-exploration web app built using **Streamlit** and **Pandas**.
+Project Overview
 
-This project was created as part of my Python coursework to demonstrate:
-- Loading a large CSV dataset  
-- Cleaning and preprocessing the dataset  
-- Performing exploratory data analysis with Pandas  
-- Building a web interface using Streamlit  
-- Filtering, grouping, and visualizing data interactively  
+This project presents an exploratory data analysis (EDA) of a large New York City taxi dataset using Python and the pandas library. The objective is to demonstrate practical data handling skills, including data cleaning, inspection, transformation, aggregation, and visualization. An optional interactive interface is provided to support exploratory analysis, but the primary emphasis of the project is on data preparation and analytical logic, not application deployment.
 
----
+## 🚕 Dataset Description
 
-## 🚕 Dataset 
+The dataset contains monthly operational statistics for different NYC taxi and for-hire vehicle (FHV) license classes. Key variables include:
+	•	Month/Year
+	•	License Class
+	•	Trips Per Day
+	•	Farebox Per Day
+	•	Unique Drivers
+	•	Unique Vehicles
+	•	Vehicle utilization and trip-duration metrics
 
-	•	Source: New York City Taxi & Limousine Commission (TLC) public data (sampled)
-	•	Format: CSV
-	•	Size: 800+ rows, multiple categorical and numerical fields
-	•	Characteristics:
-	•	Mixed data types (categorical, numeric, time-like fields)
-	•	Realistic structure typical of production datasets
-	•	Suitable for demonstrating data cleaning and EDA workflows
-
-The dataset file is stored locally in the repository under the data/ directory.
-
+The dataset includes a mix of numeric, categorical, and date-like fields, as well as missing values and numeric values stored as text.
 ---
 
 ## 🧰 Application Features  
@@ -62,6 +55,34 @@ The dataset file is stored locally in the repository under the data/ directory.
 	•	Visualize trends and distributions directly in the app
 
 ⸻
+## Data Cleaning and Preparation
+
+Several data cleaning steps were applied programmatically to prepare the dataset for analysis:
+	1.	Column name standardization
+	•	Whitespace was stripped from column names to ensure consistency.
+	2.	Date handling
+	•	Columns with date- or time-related names were automatically detected and converted to datetime format where possible.
+	3.	Numeric conversion
+	•	Numeric values stored as text (e.g., "647,819") were cleaned by removing thousands separators.
+	•	Placeholder symbols such as "-" were treated as missing values.
+	•	Cleaned values were converted to numeric types where applicable.
+	4.	Missing value handling
+	•	Missing values were preserved as NaN to allow pandas to handle them correctly during aggregation and statistical analysis.
+	5.	Dynamic data typing
+	•	Columns were programmatically classified as numeric, categorical, or datetime to support flexible analysis without hard-coded assumptions.
+	
+## Exploratory Analysis Performed
+
+The project demonstrates a range of exploratory data analysis operations, including:
+	•	Inspection of raw data samples
+	•	Dataset structure and summary statistics (DataFrame.info() and describe)
+	•	Conditional row filtering for numeric, categorical, and datetime fields
+	•	Grouping and aggregation (mean values by category)
+	•	Trend visualization of numeric variables
+	•	Category-based comparisons (e.g., average trips by license class)
+	•	Distribution analysis using binned frequency counts
+
+All analytical operations are implemented using pandas and are reproducible from the source code.
 
 ## Technologies Used
 
@@ -79,6 +100,15 @@ cd nyc-taxi-project
 pip install -r requirements.txt
 streamlit run app.py
 
+## Repository Structure
+nyc-taxi-project/
+│
+├── app.py              # Data loading, cleaning, and exploratory analysis logic
+├── data/
+│   └── sample_data.csv # Dataset used for analysis
+├── requirements.txt    # Python dependencies
+├── README.md           # Project documentation
+└── .gitignore
 
 ## (Live Deployment)
 
